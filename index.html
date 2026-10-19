@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08111f">
+    <title>La relación entre terremotos y volcanes</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .watermark {
+            width: 100%;
+            text-align: right;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #75d6d0;
+            opacity: 0.75;
+            padding: 18px 0 8px;
+        }
+
+        .conclusion {
+            margin-top: 70px;
+            padding: 30px;
+            border: 1px solid rgba(117, 214, 208, 0.2);
+            border-radius: 18px;
+            background: rgba(21, 42, 63, 0.35);
+        }
+
+        .conclusion h2 {
+            margin-bottom: 16px;
+        }
+
+        .conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .fact {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(117, 214, 208, 0.06);
+            border: 1px solid rgba(117, 214, 208, 0.15);
+        }
+
+        .fact-number {
+            color: #75d6d0;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .fact h3 {
+            margin: 12px 0 8px;
+        }
+
+        .fact p, .final-note {
+            line-height: 1.7;
+        }
+
+        .final-note {
+            margin-top: 24px;
+            padding: 16px;
+            border-left: 3px solid #ffb347;
+            background: rgba(255, 179, 71, 0.06);
+        }
+
+        @media (max-width: 600px) {
+            .conclusion {
+                padding: 20px;
+            }
+
+            .conclusion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .watermark {
+                text-align: center;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">◈</span>
+            <span>CIENCIA <span class="muted">/ TIERRA</span></span>
+        </div>
+        <span class="live">
+            <span class="live-dot"></span>
+            EXPLORACIÓN INTERACTIVA
+        </span>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p class="eyebrow">EL PLANETA EN MOVIMIENTO</p>
+            <h1>
+                La relación entre<br>
+                <span class="gradient">terremotos y volcanes</span>
+            </h1>
+            <p class="description">
+                Dos fenómenos distintos, una Tierra dinámica.
+                Explora qué sucede bajo nuestros pies.
+            </p>
+        </section>
+
+        <section class="explorer">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">01 / EXPLORA</p>
+                    <h2>¿Qué ocurre en el interior?</h2>
+                </div>
+                <span class="tag">MODELO EDUCATIVO</span>
+            </div>
+
+            <div class="scene">
+                <div class="scene-label">
+                    <span>SECCIÓN DE LA TIERRA</span>
+                    <span id="scene-status">PLACAS TECTÓNICAS</span>
+                </div>
+
+                <svg id="earth-scene" viewBox="0 0 700 350"
+                     role="img"
+                     aria-label="Ilustración esquemática del interior de la Tierra">
+                    <defs>
+                        <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#376d83"/>
+                            <stop offset="100%" stop-color="#172d49"/>
+                        </linearGradient>
+                        <linearGradient id="magma" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffb347"/>
+                            <stop offset="100%" stop-color="#f04438"/>
+                        </linearGradient>
+                        <radialGradient id="glow">
+                            <stop offset="0%" stop-color="#ff653e" stop-opacity=".45"/>
+                            <stop offset="100%" stop-color="#ff653e" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+
+                    <circle cx="350" cy="225" r="150" fill="url(#glow)"/>
+
+                    <path d="M20 105 Q100 94 180 105 T340 105 T500 105 T680 105 L680 350 L20 350 Z"
+                          fill="url(#rock)" stroke="#53869b" stroke-width="2"/>
+
+                    <path d="M20 105 Q100 94 180 105 T340 105 T500 105 T680 105"
+                          fill="none" stroke="#75d6d0" stroke-width="4"/>
+
+                    <g id="plates">
+                        <path d="M20 105 Q100 94 180 105 L180 145 L20 145 Z"
+                              fill="#397e91" stroke="#75d6d0"/>
+                        <path d="M180 105 L340 105 L340 145 L180 145 Z"
+                              fill="#2d627e" stroke="#75d6d0"/>
+                        <path d="M340 105 L500 105 L500 145 L340 145 Z"
+                              fill="#397e91" stroke="#75d6d0"/>
+                        <path d="M500 105 Q590 94 680 105 L680 145 L500 145 Z"
+                              fill="#2d627e" stroke="#75d6d0"/>
+                    </g>
+
+                    <g id="volcano" opacity="0">
+                        <path d="M265 108 L350 15 L435 108 Z"
+                              fill="#364459" stroke="#ff9c65" stroke-width="2"/>
+                        <path d="M325 40 L350 15 L375 40"
+                              fill="none" stroke="#ffb347" stroke-width="3"/>
+                        <path d="M350 38 L350 180"
+                              stroke="url(#magma)" stroke-width="12"
+                              stroke-linecap="round"/>
+                        <ellipse cx="350" cy="224" rx="60" ry="32"
+                                 fill="url(#magma)" stroke="#ffb347" stroke-width="2"/>
+                        <text x="430" y="230" class="svg-label">Cámara magmática</text>
+                        <path d="M415 225 L398 225"
+                              stroke="#ffb347" stroke-width="1.5"/>
+                    </g>
+
+                    <g id="quake-waves" opacity="0">
+                        <circle class="wave" cx="350" cy="190" r="20"/>
+                        <circle class="wave delay1" cx="350" cy="190" r="20"/>
+                        <circle class="wave delay2" cx="350" cy="190" r="20"/>
+                        <circle cx="350" cy="190" r="6" fill="#ffbf69"/>
+                        <text x="370" y="183" class="svg-label">Hipocentro</text>
+                    </g>
+
+                    <g id="plate-arrows">
+                        <path d="M220 75 L285 75 M275 65 L285 75 L275 85"
+                              fill="none" stroke="#a5e8e2" stroke-width="3"/>
+                        <path d="M480 75 L415 75 M425 65 L415 75 L425 85"
+                              fill="none" stroke="#a5e8e2" stroke-width="3"/>
+                    </g>
+
+                    <text x="30" y="165" class="svg-label">Corteza terrestre</text>
+                    <path d="M145 160 L145 130"
+                          stroke="#b7d8e4" stroke-width="1.5"/>
+                    <text x="30" y="300" class="svg-label">Interior de la Tierra</text>
+                </svg>
+
+                <div class="legend">
+                    <span><i class="legend-dot crust"></i>Corteza</span>
+                    <span><i class="legend-dot heat"></i>Magma</span>
+                    <span><i class="legend-dot wave-key"></i>Ondas sísmicas</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="mode-btn active" data-mode="plates" aria-pressed="true">
+                    <span>01</span> Placas tectónicas
+                </button>
+                <button class="mode-btn" data-mode="quake" aria-pressed="false">
+                    <span>02</span> Terremoto
+                </button>
+                <button class="mode-btn" data-mode="volcano" aria-pressed="false">
+                    <span>03</span> Volcán
+                </button>
+            </div>
+
+            <article class="explanation" aria-live="polite">
+                <p class="eyebrow" id="explanation-number">MODO 01</p>
+                <h3 id="explanation-title">Las placas se mueven</h3>
+                <p id="explanation-text">
+                    La superficie terrestre está dividida en placas tectónicas
+                    que se desplazan lentamente. Cuando interactúan, pueden
+                    producir terremotos y, en determinadas condiciones,
+                    favorecer la formación de volcanes.
+                </p>
+                <div class="key-idea">
+                    <span class="key-icon">✦</span>
+                    <p id="key-text">
+                        IDEA CLAVE: la actividad interna de la Tierra conecta
+                        muchos procesos geológicos.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section class="conclusion">
+            <p class="eyebrow">02 / CONCLUSIÓN</p>
+            <h2>Un planeta, muchos procesos</h2>
+            <p>
+                Los terremotos y los volcanes pueden estar relacionados
+                porque ambos se producen por procesos internos de la Tierra.
+                Las placas tectónicas desempeñan un papel fundamental en
+                muchas de estas zonas.
+            </p>
+
+            <div class="conclusion-grid">
+                <div class="fact">
+                    <span class="fact-number">01</span>
+                    <h3>Movimiento</h3>
+                    <p>Las placas tectónicas se desplazan e interactúan.</p>
+                </div>
+                <div class="fact">
+                    <span class="fact-number">02</span>
+                    <h3>Energía</h3>
+                    <p>La liberación repentina de energía puede generar terremotos.</p>
+                </div>
+                <div class="fact">
+                    <span class="fact-number">03</span>
+                    <h3>Magma</h3>
+                    <p>En determinadas condiciones, el magma asciende y puede alimentar volcanes.</p>
+                </div>
+            </div>
+
+            <p class="final-note">
+                IMPORTANTE: no todos los terremotos están relacionados con volcanes
+                ni todos los volcanes se forman en los límites de las placas.
+            </p>
+
+
+        <section class="map-section">
+            <p class="eyebrow">03 / EXPLORA EL PLANETA</p>
+            <h2>El Anillo de Fuego del Pacífico</h2>
+            <p class="map-intro">
+                Alrededor del océano Pacífico se encuentran numerosas zonas
+                con actividad sísmica y volcánica. Pulsa en una región para
+                descubrir por qué es importante.
+            </p>
+
+            <div class="region-buttons">
+                <button class="region-btn active" data-region="japan">
+                    Japón
+                </button>
+                <button class="region-btn" data-region="andes">
+                    Andes
+                </button>
+                <button class="region-btn" data-region="indonesia">
+                    Indonesia
+                </button>
+                <button class="region-btn" data-region="newzealand">
+                    Nueva Zelanda
+                </button>
+            </div>
+
+
+<div class="world-map" role="img"
+     aria-label="Mapa esquemático del océano Pacífico y zonas de actividad tectónica">
+    <svg class="world-map-svg" viewBox="0 0 500 300"
+         xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#173b54"/>
+                <stop offset="100%" stop-color="#091526"/>
+            </linearGradient>
+        </defs>
+
+        <rect width="500" height="300" rx="16" fill="url(#ocean)"/>
+
+        <g fill="#31566a" stroke="#588294" stroke-width="1.5">
+            <!-- Asia oriental -->
+            <path d="M245 35 L290 25 325 40 350 55 370 48 390 65
+                     380 85 355 90 345 110 320 112 300 95
+                     275 90 260 70 Z"/>
+            <!-- Alaska y costa occidental de Norteamérica -->
+            <path d="M20 25 L65 20 90 35 105 55 95 75 115 90
+                     110 115 125 135 110 160 100 185 80 175
+                     70 150 55 125 45 95 25 75 Z"/>
+            <!-- Sudamérica -->
+            <path d="M115 150 L145 155 160 180 155 205
+                     145 230 140 260 125 280 115 250
+                     110 220 105 195 Z"/>
+            <!-- Indonesia y el sudeste asiático -->
+            <path d="M285 125 L310 120 330 130 345 145
+                     325 152 305 145 Z"/>
+            <path d="M320 155 L345 160 360 170 345 178
+                     325 173 Z"/>
+            <!-- Australia -->
+            <path d="M365 190 L400 185 425 200 420 225
+                     395 240 370 225 355 205 Z"/>
+            <!-- Nueva Zelanda -->
+            <path d="M435 245 L445 255 440 270 430 260 Z"/>
+            <path d="M450 266 L460 278 453 288 445 277 Z"/>
+        </g>
+
+        <!-- Esquema aproximado de zonas activas alrededor del Pacífico -->
+        <path d="M45 65 Q105 35 175 65
+                 Q220 85 255 65
+                 Q300 55 335 85
+                 Q365 115 340 150
+                 Q330 180 365 205
+                 Q390 225 425 250
+                 M115 165 Q135 205 125 255"
+              fill="none" stroke="#ffad62" stroke-width="3"
+              stroke-linecap="round" stroke-dasharray="5 7"/>
+
+        <!-- Regiones seleccionables -->
+        <g class="map-markers" fill="#ffb347" stroke="#fff0d5" stroke-width="2">
+            <circle cx="355" cy="94" r="6"/>
+            <circle cx="125" cy="210" r="6"/>
+            <circle cx="325" cy="158" r="6"/>
+            <circle cx="443" cy="270" r="6"/>
+        </g>
+
+        <g fill="#e8f4fb" font-size="11" font-family="sans-serif">
+            <text x="185" y="140" text-anchor="middle"
+                  fill="#75d6d0" font-size="13" letter-spacing="2">
+                OCÉANO PACÍFICO
+            </text>
+            <text x="365" y="82">Japón</text>
+            <text x="65" y="205">Andes</text>
+            <text x="285" y="178">Indonesia</text>
+            <text x="380" y="290">Nueva Zelanda</text>
+        </g>
+
+        <text x="15" y="286" fill="#9bb7c9" font-size="9"
+              font-family="sans-serif" letter-spacing="1">
+            ESQUEMA EDUCATIVO · NO A ESCALA
+        </text>
+    </svg>
+
+<div class="map-legend">
+    <div class="legend-item">
+        <span class="legend-line"></span>
+        <span>Zona aproximada de actividad tectónica</span>
+    </div>
+
+    <div class="legend-item">
+        <span class="legend-dot"></span>
+        <span>Región destacada</span>
+    </div>
+
+    <div class="legend-item">
+        <span class="legend-ocean"></span>
+        <span>Océano Pacífico</span>
+    </div>
+</div>
+
+</div>
+
+                <article class="region-info" aria-live="polite">
+                    <p class="eyebrow" id="region-label">REGIÓN 01</p>
+                    <h3 id="region-title">Japón</h3>
+                    <p id="region-text">
+                        Japón está situado cerca de varias placas tectónicas.
+                        Su interacción provoca terremotos frecuentes y ha
+                        favorecido la formación de numerosos volcanes.
+                    </p>
+                    <div class="key-idea">
+                        <span class="key-icon">✦</span>
+                        <p id="region-fact">
+                            IDEA CLAVE: la interacción entre placas puede
+                            generar terremotos y actividad volcánica.
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <p class="map-note">
+                Este mapa es un esquema educativo, no representa las fronteras
+                exactas de las placas ni la ubicación precisa de todos los volcanes.
+            </p>
+        </section>
+
+        </section>
+
+<section class="simulation-section" id="simulacion">
+    <p class="eyebrow">04 / EXPERIMENTO INTERACTIVO</p>
+    <h2>¿Cómo se produce un terremoto?</h2>
+    <p class="simulation-intro">
+        Las placas tectónicas se mueven lentamente. Cuando las rocas acumulan
+        demasiada tensión, pueden romperse o deslizarse bruscamente y liberar energía.
+    </p>
+
+    <div class="quake-lab">
+        <div class="quake-visual" id="quake-visual">
+            <svg viewBox="0 0 600 300" role="img"
+                 aria-label="Ilustración de dos bloques de roca separados por una falla">
+                <defs>
+                    <linearGradient id="rock-gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#536b82"/>
+                        <stop offset="100%" stop-color="#263b50"/>
+                    </linearGradient>
+                </defs>
+
+                <rect x="0" y="0" width="600" height="300" rx="16" fill="#0a1728"/>
+                <path d="M0 80 H600 V300 H0 Z" fill="#182b40"/>
+                <path d="M0 80 H600" stroke="#7c9ab2" stroke-width="3"/>
+
+                <g class="quake-rock quake-rock-left">
+                    <path d="M0 84 H305 L255 300 H0 Z"
+                          fill="url(#rock-gradient)" stroke="#7890a5" stroke-width="2"/>
+                    <path d="M25 120 L110 145 M75 205 L180 225 M190 110 L250 130"
+                          stroke="#91a5b7" stroke-width="2" opacity=".45"/>
+                </g>
+
+                <g class="quake-rock quake-rock-right">
+                    <path d="M305 84 H600 V300 H255 Z"
+                          fill="url(#rock-gradient)" stroke="#7890a5" stroke-width="2"/>
+                    <path d="M365 125 L470 150 M340 215 L440 235 M485 185 L555 205"
+                          stroke="#91a5b7" stroke-width="2" opacity=".45"/>
+                </g>
+
+                <path d="M305 84 L255 300" stroke="#ffb347"
+                      stroke-width="5" stroke-dasharray="9 7"/>
+                <circle class="quake-focus" cx="285" cy="190" r="8" fill="#ffb347"/>
+                <g class="seismic-waves" fill="none" stroke="#ffb347"
+                   stroke-width="3" opacity="0">
+                    <circle cx="285" cy="190" r="24"/>
+                    <circle cx="285" cy="190" r="48"/>
+                    <circle cx="285" cy="190" r="72"/>
+                </g>
+
+                <text x="24" y="42" fill="#dce8f4" font-size="16">
+                    BLOQUES DE ROCA
+                </text>
+                <text x="325" y="278" fill="#ffcf86" font-size="14">
+                    FALLA
+                </text>
+            </svg>
+        </div>
+
+        <div class="quake-controls">
+            <p class="eyebrow">OBSERVA EL PROCESO</p>
+            <h3 id="quake-stage-title">1. Se acumula la tensión</h3>
+            <p id="quake-stage-text" aria-live="polite">
+                Las rocas soportan fuerzas debido al movimiento de las placas.
+                La tensión aumenta hasta que se supera su resistencia.
+            </p>
+
+            <div class="quake-progress" aria-label="Progreso de la simulación">
+                <span class="quake-step active"></span>
+                <span class="quake-step"></span>
+                <span class="quake-step"></span>
+            </div>
+
+            <button class="simulation-btn" id="quake-start" type="button">
+                Iniciar terremoto
+            </button>
+            <button class="simulation-reset" id="quake-reset" type="button">
+                Volver al inicio
+            </button>
+        </div>
+    </div>
+
+    <p class="map-note">
+        Es una simulación simplificada: representa el proceso de forma visual,
+        no reproduce un terremoto real a escala.
+    </p>
+</section>
+
+<section class="volcano-section" id="volcan">
+    <p class="eyebrow">05 / DENTRO DE LA TIERRA</p>
+    <h2>¿Cómo se forma una erupción volcánica?</h2>
+    <p class="volcano-intro">
+        En determinadas condiciones, el magma asciende desde el interior de la Tierra.
+        Si consigue llegar a la superficie, puede producirse una erupción.
+        Cuando sale al exterior, el magma se llama lava.
+    </p>
+
+    <div class="volcano-lab">
+        <div class="volcano-visual" id="volcano-visual">
+            <svg viewBox="0 0 600 390" role="img"
+                 aria-label="Corte esquemático de un volcán con cámara magmática y chimenea">
+                <defs>
+                    <linearGradient id="volcano-rock" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#66778a"/>
+                        <stop offset="100%" stop-color="#263548"/>
+                    </linearGradient>
+                    <linearGradient id="magma-gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffcf70"/>
+                        <stop offset="100%" stop-color="#f05a28"/>
+                    </linearGradient>
+                </defs>
+
+                <rect width="600" height="390" rx="18" fill="#091526"/>
+                <circle cx="470" cy="65" r="28" fill="#25384d"/>
+                <circle cx="470" cy="65" r="17" fill="#ffcf70" opacity=".8"/>
+
+                <path d="M0 220 Q110 205 180 220 Q250 230 300 215 Q410 195 600 220 V390 H0Z"
+                      fill="#172a3d"/>
+
+                <path d="M55 220 L190 105 L250 130 L300 78 L350 130 L410 105 L545 220Z"
+                      fill="url(#volcano-rock)" stroke="#91a4b8" stroke-width="3"/>
+
+                <path d="M245 220 L280 135 L290 105 L310 105 L320 135 L355 220Z"
+                      fill="#172333" stroke="#ffb347" stroke-width="3"/>
+
+                <path d="M287 220 L292 145 L295 115 L305 115 L308 145 L313 220Z"
+                      fill="url(#magma-gradient)" class="volcano-magma"/>
+
+                <ellipse cx="300" cy="310" rx="83" ry="44"
+                         fill="#8f3428" stroke="#ffb347" stroke-width="4"
+                         class="magma-chamber"/>
+                <ellipse cx="300" cy="310" rx="64" ry="27" fill="url(#magma-gradient)"/>
+
+                <path d="M275 105 Q300 90 325 105"
+                      fill="none" stroke="#ffb347" stroke-width="5"
+                      stroke-linecap="round"/>
+
+                <g class="volcano-lava" fill="#ffb347" opacity="0">
+                    <circle cx="285" cy="80" r="8"/>
+                    <circle cx="310" cy="65" r="6"/>
+                    <circle cx="330" cy="83" r="7"/>
+                    <circle cx="265" cy="60" r="5"/>
+                </g>
+
+                <g fill="#e0e9f3" font-size="14">
+                    <text x="25" y="35">CORTE DEL VOLCÁN</text>
+                    <text x="390" y="265">Cámara magmática</text>
+                    <text x="390" y="285" fill="#ffcf70">Magma acumulado</text>
+                    <path d="M380 275 L350 300" stroke="#ffcf70" stroke-width="2" fill="none"/>
+                    <text x="25" y="170">Chimenea</text>
+                    <path d="M110 165 L270 150" stroke="#e0e9f3" stroke-width="2" fill="none"/>
+                    <text x="350" y="55">Erupción</text>
+                    <path d="M345 60 L320 78" stroke="#e0e9f3" stroke-width="2" fill="none"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="volcano-controls">
+            <p class="eyebrow">EXPERIMENTO INTERACTIVO</p>
+            <h3 id="volcano-stage-title">1. Se acumula el magma</h3>
+            <p id="volcano-stage-text" aria-live="polite">
+                El magma puede acumularse en el interior de la Tierra.
+                La presión y otros factores pueden favorecer su ascenso.
+            </p>
+
+            <div class="volcano-progress">
+                <span class="volcano-step active"></span>
+                <span class="volcano-step"></span>
+                <span class="volcano-step"></span>
+            </div>
+
+            <button class="volcano-start" id="volcano-start" type="button">
+                Iniciar erupción
+            </button>
+            <button class="volcano-reset" id="volcano-reset" type="button">
+                Volver al inicio
+            </button>
+        </div>
+    </div>
+
+    <p class="map-note">
+        Es una representación educativa simplificada. Las erupciones reales varían
+        según el tipo de magma, el gas y las características de cada volcán.
+    </p>
+</section>
+
+<section class="quiz-section" id="cuestionario">
+    <p class="eyebrow">06 / PON A PRUEBA LO APRENDIDO</p>
+    <h2>¿Cuánto sabes sobre la Tierra?</h2>
+    <p class="quiz-intro">
+        Responde a estas cinco preguntas para comprobar lo que has aprendido
+        sobre terremotos, volcanes y placas tectónicas.
+    </p>
+
+    <form id="earth-quiz">
+        <fieldset class="quiz-question" data-correct="b">
+            <legend>1. ¿Qué provoca muchos terremotos?</legend>
+            <label><input type="radio" name="q1" value="a"> Los cambios de temperatura del aire.</label>
+            <label><input type="radio" name="q1" value="b"> El movimiento brusco de rocas en una falla.</label>
+            <label><input type="radio" name="q1" value="c"> Las fases de la Luna.</label>
+        </fieldset>
+
+        <fieldset class="quiz-question" data-correct="a">
+            <legend>2. ¿Cómo se llama el magma cuando llega a la superficie?</legend>
+            <label><input type="radio" name="q2" value="a"> Lava.</label>
+            <label><input type="radio" name="q2" value="b"> Vapor.</label>
+            <label><input type="radio" name="q2" value="c"> Ceniza.</label>
+        </fieldset>
+
+        <fieldset class="quiz-question" data-correct="c">
+            <legend>3. ¿Qué es una placa tectónica?</legend>
+            <label><input type="radio" name="q3" value="a"> Una capa de nubes.</label>
+            <label><input type="radio" name="q3" value="b"> Una parte del núcleo terrestre.</label>
+            <label><input type="radio" name="q3" value="c"> Un fragmento rígido de la parte externa de la Tierra.</label>
+        </fieldset>
+
+        <fieldset class="quiz-question" data-correct="b">
+            <legend>4. ¿Dónde se encuentra el Anillo de Fuego del Pacífico?</legend>
+            <label><input type="radio" name="q4" value="a"> Alrededor del océano Atlántico.</label>
+            <label><input type="radio" name="q4" value="b"> En las zonas que rodean el océano Pacífico.</label>
+            <label><input type="radio" name="q4" value="c"> En el centro de África.</label>
+        </fieldset>
+
+        <fieldset class="quiz-question" data-correct="a">
+            <legend>5. ¿Todos los terremotos están relacionados con volcanes?</legend>
+            <label><input type="radio" name="q5" value="a"> No, muchos terremotos no están relacionados directamente con volcanes.</label>
+            <label><input type="radio" name="q5" value="b"> Sí, todos los terremotos producen una erupción.</label>
+            <label><input type="radio" name="q5" value="c"> Sí, pero solo bajo el océano.</label>
+        </fieldset>
+
+        <div class="quiz-actions">
+            <button class="quiz-submit" type="submit">Corregir respuestas</button>
+            <button class="quiz-reset" id="quiz-reset" type="button">Volver a intentarlo</button>
+        </div>
+
+        <div id="quiz-result" class="quiz-result" aria-live="polite" role="status">
+            Elige una respuesta en cada pregunta y pulsa «Corregir respuestas».
+        </div>
+    </form>
+</section>
+
+        <footer>
+            <span>LA TIERRA ESTÁ EN CONSTANTE TRANSFORMACIÓN</span>
+            <span>CIENCIA · GEOLOGÍA · PLANETA TIERRA</span>
+            <div class="watermark">HECHO POR FRAN, MIKEL Y SIMON</div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
